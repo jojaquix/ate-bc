@@ -3,3 +3,4 @@
 *.compiled
 src/lib/*
 src/*.exe
+src/backup

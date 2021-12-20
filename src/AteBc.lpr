@@ -2,12 +2,11 @@ program AteBc;
 
 {$mode objfpc}{$H+}
 
-uses
-  {$IFDEF UNIX}{$IFDEF UseCThreads}
-  cthreads,
-  {$ENDIF}{$ENDIF}
-  Classes, SysUtils, CustApp
-  { you can add units after this };
+uses {$IFDEF UNIX} {$IFDEF UseCThreads}
+  cthreads, {$ENDIF} {$ENDIF}
+  Classes,
+  SysUtils,
+  CustApp { you can add units after this };
 
 type
 
@@ -22,62 +21,63 @@ type
     procedure WriteHelp; virtual;
   end;
 
-{ TAceBc }
+  { TAceBc }
 
-procedure TAteBc.DoRun;
-var
-  ErrorMsg: String;
-begin
-  // quick check parameters
-  ErrorMsg:=CheckOptions('h', 'help');
-  if ErrorMsg<>'' then begin
-    ShowException(Exception.Create(ErrorMsg));
+  procedure TAteBc.DoRun;
+  var
+    ErrorMsg: string;
+  begin
+    // quick check parameters
+    ErrorMsg := CheckOptions('h', 'help');
+    if ErrorMsg <> '' then
+    begin
+      ShowException(Exception.Create(ErrorMsg));
+      Terminate;
+      Exit;
+    end;
+
+    // parse parameters
+    if HasOption('h', 'help') then
+    begin
+      WriteHelp;
+      Terminate;
+      Exit;
+    end;
+
+    { add your program here }
+
+    // stop program loop
     Terminate;
-    Exit;
   end;
 
-  // parse parameters
-  if HasOption('h', 'help') then begin
-    WriteHelp;
-    Terminate;
-    Exit;
+  constructor TAteBc.Create(TheOwner: TComponent);
+  begin
+    inherited Create(TheOwner);
+    StopOnException := True;
   end;
 
-  { add your program here }
+  destructor TAteBc.Destroy;
+  begin
+    inherited Destroy;
+  end;
 
-  // stop program loop
-  Terminate;
-end;
-
-constructor TAteBc.Create(TheOwner: TComponent);
-begin
-  inherited Create(TheOwner);
-  StopOnException:=True;
-end;
-
-destructor TAteBc.Destroy;
-begin
-  inherited Destroy;
-end;
-
-procedure TAteBc.WriteHelp;
-begin
-  { add your help code here }
-  WriteLn('A Basic Calculator for command line');
-  writeln('Usage: ', ExeName, ' -h');
-end;
+  procedure TAteBc.WriteHelp;
+  begin
+    { add your help code here }
+    writeln('A Basic Calculator for command line');
+    writeln('Usage: ', ExeName, ' -h');
+  end;
 
 var
   Application: TAteBc;
 begin
-  Application:=TAteBc.Create(nil);
-  Application.Title:='Basic Calc';
+  Application := TAteBc.Create(nil);
+  Application.Title := 'Basic Calc';
   Application.Run;
   Application.Free;
 end.
 
- 
- 
- 
- 
- 
+
+
+
+
