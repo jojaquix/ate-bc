@@ -1,0 +1,7 @@
+/.project
+
+*.dll
+*.lps
+*.dbg
+**/lib/
+**/backup/

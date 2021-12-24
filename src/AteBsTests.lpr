@@ -14,6 +14,7 @@ type
   // override the protected methods of TTestRunner to customize its behavior
   end;
 
+
 var
   Application: TMyTestRunner;
 

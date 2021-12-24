@@ -1,0 +1,38 @@
+"Name"    = 'ate-bc'
+"Author"  = 'jhon james quintero'
+"Version" = '0.1-dev'
+"About"   = 'basic calculator grammar'
+
+"Case Sensitive" = True 
+
+"Start Symbol" = <ExpMulDiv>
+               
+   
+IntegerLiteral = {Number}|{Number}+
+               
+
+<ExpMulDiv> ::= <Value> '/' <ExpMulDiv>            
+            | <Value> '*' <ExpMulDiv>
+            | <Value>
+
+<ExpAddSub> ::= <ExpMulDiv> '+' <ExpAddSub>
+            !| <ExpAddSub> '+' <ExpMulDiv>
+            | <ExpAddSub> '-' <ExpMulDiv>
+            !| <ExpMulDiv> '-' <ExpAddSub>
+            | <ExpMulDiv>
+
+<Exp1> ::= <ExpAddSub>
+
+<Value> ::= <Literal>
+
+<Literal> ::= <NumberLiteral>
+          | '-' <NumberLiteral> 
+ 
+<NumberLiteral> ::= IntegerLiteral
+ 
+
+
+
+
+
+

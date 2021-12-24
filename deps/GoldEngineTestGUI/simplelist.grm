@@ -1,0 +1,14 @@
+"Name"    = Simple
+"Author"  = Devin Cook
+"Version" = Example
+"About"   = This is a very simple grammar designed for use in examples
+
+"Case Sensitive" = False 
+"Start Symbol"   = <Statements>
+
+Identifier = {Letter}{Alphanumeric}*
+<List> ::= <Statement> ';' <List>
+         | 
+
+<Statement> ::= print '(' Identifier ')'
+              | read '(' Identifier ')'

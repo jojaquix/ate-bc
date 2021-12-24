@@ -1,0 +1,28 @@
+###################PARSE_TREE###################
++--<ExpMulDiv> ::= <Value> / <ExpMulDiv>
+|  +--<Value> ::= <Literal>
+|  |  +--<Literal> ::= <NumberLiteral>
+|  |  |  +--<NumberLiteral> ::= 'IntegerLiteral'
+|  |  |  |  +--5
+|  +--/
+|  +--<ExpMulDiv> ::= <Value>
+|  |  +--<Value> ::= <Literal>
+|  |  |  +--<Literal> ::= <NumberLiteral>
+|  |  |  |  +--<NumberLiteral> ::= 'IntegerLiteral'
+|  |  |  |  |  +--3
+
+#######################LOG######################
+Token read: IntegerLiteral, 5 (1,1)
+Token read: /, / (1,2)
+Reduction: <NumberLiteral> ::= 'IntegerLiteral' (1,2)
+Reduction: <Literal> ::= <NumberLiteral> (1,2)
+Reduction: <Value> ::= <Literal> (1,2)
+Token read: IntegerLiteral, 3 (1,3)
+Token read: EOF,  (1,4)
+Reduction: <NumberLiteral> ::= 'IntegerLiteral' (1,4)
+Reduction: <Literal> ::= <NumberLiteral> (1,4)
+Reduction: <Value> ::= <Literal> (1,4)
+Reduction: <ExpMulDiv> ::= <Value> (1,4)
+Reduction: <ExpMulDiv> ::= <Value> / <ExpMulDiv> (1,4)
+Grammar accepted successfully. (1,4)
+

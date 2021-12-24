@@ -1,0 +1,10 @@
+/backup/
+/lib/
+*.res
+*.cgt
+/goldtrcc.txt
+*.exe
+*.dbg
+*.lps
+*.egt
+*.txt

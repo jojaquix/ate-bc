@@ -1,0 +1,7 @@
+C:\development\ate-bc\assets\goldtrcc.exe .\ate-bc.cgt .\test.txt salida 
+Heap dump by heaptrc unit of C:\development\ate-bc\assets\goldtrcc.exe
+631 memory blocks allocated : 47289/49496
+631 memory blocks freed     : 47289/49496
+0 unfreed memory blocks : 0
+True heap size : 491520 (160 used in System startup)
+True free heap : 491360

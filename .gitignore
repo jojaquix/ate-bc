@@ -1,6 +1,10 @@
 .vscode/
 *.o
 *.compiled
-src/lib/*
+*.dbg
+*.lps
+*.dbg
+**/lib/
+**/backup/
 src/*.exe
-src/backup
+

@@ -5,24 +5,20 @@ unit uAteBcTests;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry;
+  Classes, SysUtils, fpcunit, testutils, testregistry, Engine;
 
 type
-
-  TAteBcTests= class(TTestCase)
+  TAteBcTests = class(TTestCase)
   protected
     procedure SetUp; override;
     procedure TearDown; override;
   published
-    procedure TestHookUp;
+    procedure EvaluateIntAdd;
   end;
 
 implementation
 
-procedure TAteBcTests.TestHookUp;
-begin
-  Fail('Write your own test');
-end;
+
 
 procedure TAteBcTests.SetUp;
 begin
@@ -32,6 +28,11 @@ end;
 procedure TAteBcTests.TearDown;
 begin
 
+end;
+
+procedure TAteBcTests.EvaluateIntAdd;
+begin
+  AssertTrue(Engine.Add(5 ,3) = 8);
 end;
 
 initialization

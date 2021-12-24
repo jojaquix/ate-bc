@@ -26,16 +26,19 @@
         <PackageName Value="FCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="2">
+    <Units Count="3">
       <Unit0>
         <Filename Value="AteBsTests.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="uatebctests.pas"/>
+        <Filename Value="uAteBcTests.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uAteBcTests"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="Engine.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit2>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
