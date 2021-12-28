@@ -14,9 +14,12 @@ interface
 uses
   {$ifdef fpc}LCLIntf, LCLType,{$else}types,{$endif} SysUtils, Classes,
   Graphics, Controls, Forms,
-  Dialogs, gold_types, cgt, StdCtrls, GOLDParser, Symbol;
+  Dialogs, gold_types, cgt, StdCtrls, ExtCtrls, GOLDParser, Symbol;
 
 type
+
+  { TMain }
+
   TMain = class(TForm)
     cmdParse: TButton;
     GroupBox1: TGroupBox;
@@ -30,6 +33,9 @@ type
     cmdClose: TButton;
     OpenDialog1: TOpenDialog;
     cmdOpenFile: TButton;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
     procedure cmdParseClick(Sender: TObject);
     procedure cmdCloseClick(Sender: TObject);
     procedure cmdOpenFileClick(Sender: TObject);

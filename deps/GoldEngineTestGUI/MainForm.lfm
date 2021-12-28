@@ -1,12 +1,12 @@
 object Main: TMain
-  Left = -1301
-  Height = 493
-  Top = 155
-  Width = 593
+  Left = 365
+  Height = 545
+  Top = 113
+  Width = 578
   BorderStyle = bsSingle
   Caption = 'Test The Grammar - Free Pascal Version'
-  ClientHeight = 493
-  ClientWidth = 593
+  ClientHeight = 545
+  ClientWidth = 578
   Color = clBtnFace
   Font.Color = clWindowText
   Font.Height = -11
@@ -14,83 +14,163 @@ object Main: TMain
   OnCreate = FormCreate
   LCLVersion = '2.0.12.0'
   object GroupBox1: TGroupBox
-    Left = 8
-    Height = 145
-    Top = 8
-    Width = 577
+    Left = 0
+    Height = 200
+    Top = 0
+    Width = 578
+    Align = alTop
     Caption = ' GOLD Parser Input '
-    ClientHeight = 127
-    ClientWidth = 573
-    TabOrder = 1
-    object Label1: TLabel
-      Left = 14
-      Height = 13
-      Top = 10
-      Width = 41
-      Caption = 'CGT File'
-      ParentColor = False
-    end
-    object Label2: TLabel
-      Left = 14
-      Height = 13
-      Top = 42
-      Width = 48
-      Caption = 'Test Input'
-      ParentColor = False
-    end
-    object txtTestInput: TMemo
-      Left = 102
-      Height = 73
-      Top = 42
-      Width = 457
-      Lines.Strings = (
-        'display ''sdf'' & num'
-      )
-      ScrollBars = ssBoth
+    ClientHeight = 182
+    ClientWidth = 574
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Quality = fqAntialiased
+    ParentFont = False
+    TabOrder = 0
+    object Panel1: TPanel
+      Left = 0
+      Height = 50
+      Top = 0
+      Width = 574
+      Align = alTop
+      BevelOuter = bvNone
+      ClientHeight = 50
+      ClientWidth = 574
       TabOrder = 0
+      object txtCGTFilePath: TEdit
+        Left = 0
+        Height = 37
+        Top = 13
+        Width = 474
+        Align = alClient
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Quality = fqCleartype
+        ParentFont = False
+        TabOrder = 0
+        Text = 'C:\Dev\goldparsersample\simple.cgt'
+      end
+      object cmdOpenFile: TButton
+        Left = 474
+        Height = 37
+        Top = 13
+        Width = 100
+        Align = alRight
+        Caption = '...'
+        OnClick = cmdOpenFileClick
+        TabOrder = 1
+      end
+      object Label1: TLabel
+        Left = 0
+        Height = 13
+        Top = 0
+        Width = 574
+        Align = alTop
+        Caption = 'CGT File'
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Quality = fqCleartype
+        ParentColor = False
+        ParentFont = False
+      end
     end
-    object txtCGTFilePath: TEdit
-      Left = 102
-      Height = 21
-      Top = 10
-      Width = 433
+    object Panel2: TPanel
+      Left = 0
+      Height = 132
+      Top = 50
+      Width = 574
+      Align = alClient
+      Anchors = [akTop, akLeft, akRight]
+      BevelOuter = bvNone
+      ClientHeight = 132
+      ClientWidth = 574
       TabOrder = 1
-      Text = 'C:\Dev\goldparsersample\simple.cgt'
+      object Label2: TLabel
+        Left = 0
+        Height = 13
+        Top = 0
+        Width = 574
+        Align = alTop
+        Caption = 'Test Input'
+        ParentColor = False
+      end
+      object txtTestInput: TMemo
+        Left = 0
+        Height = 69
+        Top = 13
+        Width = 574
+        Align = alClient
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Quality = fqCleartype
+        Lines.Strings = (
+          'display ''sdf'' & num'
+        )
+        ParentFont = False
+        ScrollBars = ssBoth
+        TabOrder = 0
+      end
+      object Panel3: TPanel
+        Left = 0
+        Height = 50
+        Top = 82
+        Width = 574
+        Align = alBottom
+        BevelOuter = bvNone
+        ClientHeight = 50
+        ClientWidth = 574
+        TabOrder = 1
+        object cmdParse: TButton
+          Left = 0
+          Height = 25
+          Top = 25
+          Width = 200
+          Align = alBottom
+          Anchors = [akLeft]
+          Caption = 'Parse'
+          Constraints.MaxWidth = 200
+          OnClick = cmdParseClick
+          TabOrder = 0
+        end
+        object chkTrimReductions: TCheckBox
+          Left = 0
+          Height = 25
+          Top = 0
+          Width = 97
+          Align = alLeft
+          Caption = 'Trim Reductions'
+          Checked = True
+          State = cbChecked
+          TabOrder = 1
+        end
+      end
     end
-    object cmdOpenFile: TButton
-      Left = 542
-      Height = 17
-      Top = 10
-      Width = 19
-      Caption = '...'
-      OnClick = cmdOpenFileClick
-      TabOrder = 2
-    end
-  end
-  object chkTrimReductions: TCheckBox
-    Left = 8
-    Height = 19
-    Top = 160
-    Width = 97
-    Caption = 'Trim Reductions'
-    Checked = True
-    State = cbChecked
-    TabOrder = 2
   end
   object GroupBox2: TGroupBox
-    Left = 8
-    Height = 273
-    Top = 184
-    Width = 577
+    Left = 0
+    Height = 320
+    Top = 200
+    Width = 578
+    Align = alClient
     Caption = ' Parse Tree '
-    ClientHeight = 255
-    ClientWidth = 573
-    TabOrder = 3
+    ClientHeight = 302
+    ClientWidth = 574
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Quality = fqAntialiased
+    ParentFont = False
+    TabOrder = 1
     object txtParseTree: TMemo
-      Left = 6
-      Height = 225
-      Top = 10
-      Width = 561
+      Left = 0
+      Height = 302
+      Top = 0
+      Width = 574
+      Align = alClient
       Font.CharSet = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -125,26 +205,20 @@ object Main: TMain
     end
   end
   object cmdClose: TButton
-    Left = 512
+    Left = 0
     Height = 25
-    Top = 464
-    Width = 75
+    Top = 520
+    Width = 200
+    Align = alBottom
+    Anchors = [akRight]
     Caption = 'Close'
+    Constraints.MaxWidth = 200
     OnClick = cmdCloseClick
-    TabOrder = 4
-  end
-  object cmdParse: TButton
-    Left = 512
-    Height = 25
-    Top = 160
-    Width = 75
-    Caption = 'Parse'
-    OnClick = cmdParseClick
-    TabOrder = 0
+    TabOrder = 2
   end
   object OpenDialog1: TOpenDialog
     Filter = 'Compiled Grammar Table|*.cgt'
-    Left = 480
-    Top = 160
+    Left = 456
+    Top = 32
   end
 end
