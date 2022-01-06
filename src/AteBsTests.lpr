@@ -3,7 +3,7 @@ program AteBsTests;
 {$mode objfpc}{$H+}
 
 uses
-  Classes, consoletestrunner, uAteBcTests;
+  Classes, consoletestrunner, uAteBcTests, Status, GOLDParser;
 
 type
 
@@ -21,7 +21,7 @@ var
 begin
   Application := TMyTestRunner.Create(nil);
   Application.Initialize;
-  Application.Title := 'Ate Bc Tests Runner';
+  Application.Title:='AteBsTests';
   Application.Run;
   Application.Free;
 end.

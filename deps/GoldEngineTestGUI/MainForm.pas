@@ -61,7 +61,7 @@ begin
   gp.DoParse;
 
   if gp.ParsedOk then
-     txtParseTree.Text:= GP.Tree
+     txtParseTree.Text:= GP.StrTree
   else
     txtParseTree.Text:= GP.Log;
 

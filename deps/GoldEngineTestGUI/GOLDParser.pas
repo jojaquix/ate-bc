@@ -23,25 +23,29 @@ type
 
   private
     fparsedOk: boolean;
-    ftree: string;
+    ftreeStr: string;
     flog: TStrings;
-
-    tablesFilePath: string;
-    testString: string;
 
     function GetLog: string;
     procedure AddLog(const s: string; const p: TPosition);
 
-
   public
     constructor Create; overload;
-    constructor Create(const tablesFilePath, testString: string); overload;
+    constructor Create(const theTablesFilePath, theTestString: string); overload;
     destructor Destroy; override;
+
+    function LoadTables(const filename: string): boolean; overload;
+    function LoadTables(const s: TStream): boolean; overload;
+
+    function OpenFile(const s: TFilename): boolean;
+    function OpenStream(const s: TStream): boolean;
+    function OpenString(const s: string): boolean;
+
 
     { Do Parse and update status flags}
     function DoParse(): boolean;
 
-    property Tree: string read ftree;
+    property StrTree: string read ftreeStr;
     property Log: string read GetLog;
     property ParsedOk: boolean read fparsedOk;
 
@@ -62,17 +66,17 @@ end;
 
 constructor TGOLDParser.Create;
 begin
-  Create(ParamStr(1), ParamStr(2));
+  inherited Create;
+  ftreeStr := '';
+  flog := TStringList.Create;
+  self.fparsedOk := False;
 end;
 
-constructor TGOLDParser.Create(const tablesFilePath, testString: string);
+constructor TGOLDParser.Create(const theTablesFilePath, theTestString: string);
 begin
-  inherited Create;
-  ftree := '';
-  flog := TStringList.Create;
-  self.testString := testString;
-  self.tablesFilePath := tablesFilePath;
-  self.fparsedOk := False;
+  Create;
+  self.LoadTables(theTablesFilePath);
+  self.OpenString(theTestString);
 end;
 
 destructor TGOLDParser.Destroy;
@@ -88,10 +92,8 @@ var
   s: string;
   i: integer;
 begin
-  done := False; // booleans are not false by default!!
+  done := False; // booleans are not false/true by default!!
   self.fparsedOk := False;
-  self.LoadTables(self.tablesFilePath);
-  self.OpenString(self.testString);
   while not done do
   begin
     res := self.Parse;
@@ -108,7 +110,7 @@ begin
       pmACCEPT:
       begin
         AddLog('Grammar accepted successfully.', CurrentPosition);
-        ftree := DrawReductionTree(CurrentReduction);
+        ftreeStr := DrawReductionTree(CurrentReduction);
       end;
 
       pmNOT_LOADED_ERROR:
@@ -139,6 +141,31 @@ begin
 
   self.fparsedOk := res = pmACCEPT;
   Result := self.fparsedOk;
+end;
+
+function TGOLDParser.LoadTables(const filename: string): boolean;
+begin
+  Result:= inherited LoadTables(filename);
+end;
+
+function TGOLDParser.LoadTables(const s: TStream): boolean;
+begin
+  Result:= inherited LoadTables(s);
+end;
+
+function TGOLDParser.OpenFile(const s: TFilename): boolean;
+begin
+  Result:= inherited OpenFile(s);
+end;
+
+function TGOLDParser.OpenStream(const s: TStream): boolean;
+begin
+  Result:= inherited OpenStream(s);
+end;
+
+function TGOLDParser.OpenString(const s: string): boolean;
+begin
+  Result:= inherited OpenString(s);
 end;
 
 
