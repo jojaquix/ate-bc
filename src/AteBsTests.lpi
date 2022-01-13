@@ -30,7 +30,7 @@
         <PackageName Value="FCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="5">
+    <Units Count="6">
       <Unit0>
         <Filename Value="AteBsTests.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -51,6 +51,11 @@
         <Filename Value="Status.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit4>
+      <Unit5>
+        <Filename Value="ast.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Ast"/>
+      </Unit5>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

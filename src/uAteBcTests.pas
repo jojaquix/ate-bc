@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
-  Engine, Status;
+  Engine, Status, Ast;
 
 type
 
@@ -22,6 +22,8 @@ type
     procedure EvaluateIntLiteral;
     procedure TestStatuses;
     procedure TestLoadTables;
+    procedure TestGenFunction;
+    procedure TestAst;
   end;
 
 implementation
@@ -85,6 +87,20 @@ begin
   st1:= parse();
   checkTree();
 
+end;
+
+procedure TAteBcTests.TestGenFunction;
+begin
+   AssertTrue(specialize Add<Integer, String>(3,'Cadena') = 3);
+end;
+
+procedure TAteBcTests.TestAst;
+var
+  expr: TExp;
+begin
+  expr := Ast.TExp.Create;
+
+  FreeAndNil(expr);
 end;
 
 

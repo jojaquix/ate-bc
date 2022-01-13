@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="11"/>
+    <Version Value="12"/>
     <PathDelim Value="\"/>
     <General>
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
+        <CompatibilityMode Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
-      <MainUnit Value="0"/>
       <Title Value="Basic Calc"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
@@ -23,14 +23,13 @@
     </PublishOptions>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="0"/>
     </RunParams>
     <RequiredPackages Count="1">
       <Item1>
         <PackageName Value="Gold_Parser_5"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="4">
       <Unit0>
         <Filename Value="AteBc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -43,6 +42,11 @@
         <Filename Value="Status.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="ast.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Ast"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

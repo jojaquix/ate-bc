@@ -37,10 +37,19 @@ var
 function checkTree: TStatus;
 var
   tree: TReduction;
+  i: Integer;
 begin
   tree := parser.CurrentReduction;
   writeln('Showing the reduction to see');
-  writeln(parser.StrTree);
+  //writeln(parser.StrTree);
+
+  for i:= 0 to tree.Count -1 do
+  begin
+    writeln('Name: ', tree[i].Name,
+    ' type: ', IntToStr(Ord(tree[i].SymbolType)),
+    ' data:', tree[i].Data,
+    ' str: ', tree[i].ToString);
+  end;
 
 end;
 

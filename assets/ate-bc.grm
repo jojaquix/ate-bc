@@ -5,29 +5,18 @@
 
 "Case Sensitive" = True 
 
-"Start Symbol" = <Exp1>
-               
-   
+"Start Symbol" = <ExpAddSub>
+                  
 IntegerLiteral = {Number}|{Number}+
                
-
-<ExpMulDiv> ::= <Value> '/' <ExpMulDiv>            
-            | <Value> '*' <ExpMulDiv>
-            | <Value>
+<ExpMulDiv> ::= <Literal> '/' <ExpMulDiv>            
+            | <Literal> '*' <ExpMulDiv>
+            | <Literal>
 
 <ExpAddSub> ::= <ExpMulDiv> '+' <ExpAddSub>
-            | <ExpAddSub> '+' <ExpMulDiv>
-            | <ExpAddSub> '-' <ExpMulDiv>
             | <ExpMulDiv> '-' <ExpAddSub>
             | <ExpMulDiv>
 
-<Exp1> ::= <ExpAddSub>
-
-<Value> ::= <Literal>
-
-<Literal> ::= <NumberLiteral>
-          | '-' <NumberLiteral> 
- 
-<NumberLiteral> ::= IntegerLiteral
- 
+<Literal> ::= IntegerLiteral
+          | '-' IntegerLiteral 
 
