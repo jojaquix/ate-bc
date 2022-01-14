@@ -43,7 +43,7 @@
         <IsPartOfProject Value="True"/>
       </Unit2>
       <Unit3>
-        <Filename Value="ast.pas"/>
+        <Filename Value="Ast.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Ast"/>
       </Unit3>

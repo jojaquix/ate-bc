@@ -1,6 +1,7 @@
 unit uAteBcTests;
 
 {$mode objfpc}{$H+}
+{$define ATE_BC_UTESTS}
 
 interface
 
@@ -96,11 +97,18 @@ end;
 
 procedure TAteBcTests.TestAst;
 var
-  expr: TExp;
+  exp1, val1, val2: TExpression;
+  res: TStatus;
 begin
-  expr := Ast.TExp.Create;
+  val1:= TExpression.Create(kIntVal, '5');
+  val2:= TExpression.Create(kIntVal, '2');
+  exp1 := TExpression.Create(kIntSum, [val1, val2]);
 
-  FreeAndNil(expr);
+  res:= visit(exp1);
+  AssertTrue(exp1.value.intValue = 7);
+
+  FreeAndNil(exp1);
+
 end;
 
 

@@ -5,18 +5,19 @@
 
 "Case Sensitive" = True 
 
-"Start Symbol" = <ExpAddSub>
+"Start Symbol" = <Exp>
                   
 IntegerLiteral = {Number}|{Number}+
+
+<Exp> ::= <Term> '+' <Exp>
+            | <Term> '-' <Exp>
+            | <Term>
+
                
-<ExpMulDiv> ::= <Literal> '/' <ExpMulDiv>            
-            | <Literal> '*' <ExpMulDiv>
-            | <Literal>
+<Term> ::= <Factor> '/' <Term>            
+            | <Factor> '*' <Term>
+            | <Factor>
 
-<ExpAddSub> ::= <ExpMulDiv> '+' <ExpAddSub>
-            | <ExpMulDiv> '-' <ExpAddSub>
-            | <ExpMulDiv>
-
-<Literal> ::= IntegerLiteral
+<Factor> ::= IntegerLiteral
           | '-' IntegerLiteral 
 
