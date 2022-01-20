@@ -7,62 +7,52 @@ interface
 uses
   Classes,
   SysUtils,
-  Status, Token;
+  Status,
+  GOLDParser,
+  Token,
+  Ast;
 
 { For Testing only }
 
 function checkTree(): TStatus;
 
+{ generate the ast from parse tree }
+function generateAst(tred: TReduction; tast: TExpression): TStatus;
 
 { Engine Api functions }
 
-function eval(exp: string): int32; overload;
-function eval(exp: string): double; overload;
-
 function loadTables(tablesFilePath: string): TStatus;
-function load(prg: string): TStatus;
-function parse(): TStatus;
-
+function parse(prg: string): TStatus;
 
 
 
 implementation
 
-uses
-  GOLDParser;
-
+{uses
+  Token, GOLDParser, Ast;
+}
 var
   parser: TGOLDParser;
 
 function checkTree: TStatus;
 var
   tree: TReduction;
-  i: Integer;
+  i: integer;
 begin
   tree := parser.CurrentReduction;
   writeln('Showing the reduction to see');
   //writeln(parser.StrTree);
 
-  for i:= 0 to tree.Count -1 do
+  for i := 0 to tree.Count - 1 do
   begin
     writeln('Name: ', tree[i].Name,
-    ' type: ', IntToStr(Ord(tree[i].SymbolType)),
-    ' data:', tree[i].Data,
-    ' str: ', tree[i].ToString);
+      ' type: ', IntToStr(Ord(tree[i].SymbolType)),
+      ' data:', tree[i].Data,
+      ' str: ', tree[i].ToString);
   end;
 
 end;
 
-{ eval functions }
-function eval(exp: string): int32;
-begin
-  Result := 0;
-end;
-
-function eval(exp: string): double;
-begin
-  Result := 0.0;
-end;
 
 function loadTables(tablesFilePath: string): TStatus;
 var
@@ -70,32 +60,34 @@ var
 begin
   try
     r := parser.LoadTables(tablesFilePath);
+    if not r then
+      Result := Failure('Tables not loaded');
   except
     on E: Exception do
       Result := Failure('Tables not loaded ' + E.Message);
   end;
 end;
 
-function load(prg: string): TStatus;
+function parse(prg: string): TStatus;
 var
   r: boolean;
 begin
-  try
-    r := parser.OpenString(prg);
-  except
-    on E: Exception do
-      Result := Failure('Prg not loaded ' + E.Message);
-  end;
-
+  r := parser.OpenString(prg);
   if not r then
     Result := Failure('Prg not loaded');
 
+  if not parser.DoParse() then
+    Result := Failure('Parse Failed:' + parser.Log);
 end;
 
-function parse: TStatus;
+
+function generateAst(tred: TReduction; tast: TExpression): TStatus;
 begin
-   if not parser.DoParse() then
-     Result := Failure('Parse Failed:' + parser.Log);
+
+  // traverse and generate ast
+  // this function looks like will
+  // be large
+
 end;
 
 initialization

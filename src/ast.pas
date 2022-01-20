@@ -1,6 +1,8 @@
 unit Ast;
 
 {$mode ObjFPC}{$H+}
+{$modeswitch advancedRecords}
+//{$scopedEnums on}
 
 interface
 
@@ -9,14 +11,23 @@ uses
   status;
 
 type
-  TExpTypes = (kEmpty, kIntVal, kIntSum, kIntProd);
+  { exp types that comes from parser}
+  TExpTypes = (keEmpty, keIntVal, keIntSum, keIntProd);
 
 
 type
+  { Used after eval the ast nodes }
+  TValTypes = (kvEmpty, kvInt, kvReal);
+
+
+type
+  { TValue }
   TValue = record
-     case expType: TExpTypes of
-       kIntVal: (intValue: Integer);
-   end;
+    class operator Initialize(var val: TValue);
+    case kind: TValTypes of
+      kvInt: (intValue: integer);
+      kvReal: (realValue: double);
+  end;
 
 //forward dec
 type
@@ -28,19 +39,15 @@ type
 
 { TExpression }
 {
- TODO if the expression is xLiteral does not have
- childrens, then does not create params field
-
  for now is public for testing
 }
 type
   TExpression = class  //expresion own its childrens
-
   public
-    expType: TExpTypes;  //todo change to property from value
+    kind: TExpTypes;
     expParams: TExpParams;
     strValue: string;
-    value: TValue;
+    Value: TValue;
 
     constructor Create;
     constructor Create(exType: TExpTypes; sval: string);
@@ -54,11 +61,11 @@ type
   end;
 
 
-
 function visit(expr: TExpression): TStatus;
 
 //may be use generic functions for ast eval
-  generic function Add<T, T2>(const A: T; const B: T2): T;
+
+//  generic function Add<T, T2>(const A: T; const B: T2): T;
 
 implementation
 
@@ -75,23 +82,22 @@ begin
     end;
 
   //post order actions
-  case expr.expType of
-    kIntVal :
-      begin
-        writeln('evaluating kIntVal', expr.strValue);
-        expr.value.expType := expr.expType;
-        expr.value.intValue:= StrToInt(expr.strValue);
-      end;
+  case expr.kind of
+    keIntVal:
+    begin
+      writeln('evaluating kIntVal', expr.strValue);
+      expr.Value.kind:=kvInt;
+      expr.Value.intValue := StrToInt(expr.strValue);
+    end;
 
-    kIntSum :
-      begin
-        writeln('evaluating kIntSum');
-        expr.value.expType:= kIntVal;
-        expr.value.intValue :=
-         (expr.expParams[0].value.intValue
-          +
-          expr.expParams[1].value.intValue);
-      end;
+    keIntSum:
+    begin
+      writeln('evaluating kIntSum');
+      expr.Value.kind := kvInt;
+      expr.Value.intValue :=
+        (expr.expParams[0].Value.intValue +
+        expr.expParams[1].Value.intValue);
+    end;
   end;
 end;
 
@@ -100,19 +106,26 @@ begin
   Result := A;
 end;
 
+{ TValue }
+
+class operator TValue.Initialize(var val: TValue);
+begin
+  val.kind := TValTypes.kvEmpty;
+end;
+
 { TExpression }
 
 constructor TExpression.Create;
 begin
   inherited Create();
-  self.expType := kEmpty;
+  self.kind := keEmpty;
 end;
 
 
 constructor TExpression.Create(exType: TExpTypes; sval: string);
 begin
   inherited Create();
-  self.expType := exType;
+  self.kind := exType;
   self.strValue := sval;
 end;
 
@@ -121,7 +134,7 @@ var
   i: integer;
 begin
   inherited Create();
-  self.expType := exType;
+  self.kind := exType;
   self.expParams := TExpParams.Create(True);
   for i := Low(args) to High(args) do
   begin

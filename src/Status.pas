@@ -16,7 +16,7 @@ unit Status;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes;
 
 { TStatus }
 { status type to represent that statuses }
