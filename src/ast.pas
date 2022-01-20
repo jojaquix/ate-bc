@@ -1,4 +1,11 @@
 unit Ast;
+{
+ Ast module, defines the types (and methods, helpers ets)
+ to build an AST that will be evaluated for the interpreter
+ for now:
+     * TExpression -> node of the AST
+     * TValue -> the value of an evaluated TExpression
+}
 
 {$mode ObjFPC}{$H+}
 {$modeswitch advancedRecords}
@@ -39,10 +46,18 @@ type
 
 { TExpression }
 {
- for now is public for testing
+ for now is public just for testing
+ maybe values should be properties
+ to allow un set values when change
+ and keep the node in consistent
+ state
 }
 type
   TExpression = class  //expresion own its childrens
+  private
+
+    function GetParam(index: Integer): TExpression;
+
   public
     kind: TExpTypes;
     expParams: TExpParams;
@@ -54,6 +69,8 @@ type
     constructor Create(exType: TExpTypes; args: array of TExpression);
     destructor Destroy; override;
 
+    property Param[index : Integer]: TExpression read GetParam; default;
+
 
   private
 
@@ -61,50 +78,11 @@ type
   end;
 
 
-function visit(expr: TExpression): TStatus;
 
-//may be use generic functions for ast eval
-
-//  generic function Add<T, T2>(const A: T; const B: T2): T;
 
 implementation
 
-{ post-order traversal }
-function visit(expr: TExpression): TStatus;
-var
-  e: TExpression;
-begin
-  writeln;
-  if Assigned(expr.expParams) then
-    for e in expr.expParams do
-    begin
-      visit(e);
-    end;
 
-  //post order actions
-  case expr.kind of
-    keIntVal:
-    begin
-      writeln('evaluating kIntVal', expr.strValue);
-      expr.Value.kind:=kvInt;
-      expr.Value.intValue := StrToInt(expr.strValue);
-    end;
-
-    keIntSum:
-    begin
-      writeln('evaluating kIntSum');
-      expr.Value.kind := kvInt;
-      expr.Value.intValue :=
-        (expr.expParams[0].Value.intValue +
-        expr.expParams[1].Value.intValue);
-    end;
-  end;
-end;
-
-generic function Add<T, T2>(const A: T; const B: T2): T;
-begin
-  Result := A;
-end;
 
 { TValue }
 
@@ -114,6 +92,7 @@ begin
 end;
 
 { TExpression }
+
 
 constructor TExpression.Create;
 begin
@@ -147,6 +126,11 @@ begin
   if Assigned(expParams) then
     FreeAndNil(expParams);
   inherited;
+end;
+
+function TExpression.GetParam(index: Integer): TExpression;
+begin
+  Result:= self.expParams[index];
 end;
 
 end.

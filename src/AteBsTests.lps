@@ -2,246 +2,173 @@
 <CONFIG>
   <ProjectSession>
     <PathDelim Value="\"/>
-    <Version Value="11"/>
+    <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="14">
+    <Units Count="13">
       <Unit0>
         <Filename Value="AteBsTests.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="2"/>
-        <CursorPos X="46" Y="22"/>
-        <UsageCount Value="73"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="9"/>
+        <CursorPos X="53" Y="11"/>
+        <UsageCount Value="227"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="uAteBcTests.pas"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="59"/>
-        <CursorPos X="12" Y="68"/>
-        <UsageCount Value="73"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="23" Y="18"/>
+        <UsageCount Value="227"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="Engine.pas"/>
+        <Filename Value="Interpreter.pas"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="20"/>
-        <CursorPos X="27" Y="43"/>
-        <UsageCount Value="73"/>
+        <CursorPos X="17"/>
+        <UsageCount Value="227"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\deps\GoldEngineTestGUI\GOLDParser.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
-        <TopLine Value="37"/>
-        <CursorPos X="42" Y="46"/>
-        <UsageCount Value="23"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="155"/>
+        <CursorPos X="18" Y="37"/>
+        <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="Status.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="17"/>
-        <CursorPos X="17" Y="35"/>
-        <UsageCount Value="24"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="64"/>
+        <CursorPos X="10" Y="19"/>
+        <UsageCount Value="200"/>
       </Unit4>
       <Unit5>
-        <Filename Value="C:\bin\lazarus\fpc\3.2.0\source\packages\fcl-fpcunit\src\fpcunit.pp"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="232"/>
-        <CursorPos X="3" Y="197"/>
-        <UsageCount Value="9"/>
+        <Filename Value="Ast.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="2" Y="131"/>
+        <UsageCount Value="90"/>
+        <Loaded Value="True"/>
       </Unit5>
       <Unit6>
-        <Filename Value="C:\bin\lazarus\fpc\3.2.0\source\packages\fcl-fpcunit\src\testregistry.pp"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="12"/>
-        <CursorPos Y="30"/>
-        <UsageCount Value="9"/>
-      </Unit6>
-      <Unit7>
         <Filename Value="..\deps\GoldEngine\src\parser.pas"/>
         <UnitName Value="Parser"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="580"/>
-        <CursorPos X="26" Y="587"/>
-        <UsageCount Value="13"/>
+        <TopLine Value="65"/>
+        <CursorPos X="14" Y="71"/>
+        <UsageCount Value="97"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\deps\GoldEngine\src\token.pas"/>
+        <UnitName Value="Token"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="80"/>
+        <CursorPos Y="82"/>
+        <UsageCount Value="87"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit7>
       <Unit8>
-        <Filename Value="..\deps\GoldEngine\src\gcontnrs.pas"/>
-        <UnitName Value="GContnrs"/>
+        <Filename Value="..\deps\GoldEngine\src\symbol.pas"/>
+        <UnitName Value="Symbol"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="39"/>
-        <UsageCount Value="12"/>
+        <TopLine Value="22"/>
+        <CursorPos X="14" Y="38"/>
+        <UsageCount Value="87"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit8>
       <Unit9>
-        <Filename Value="..\deps\GoldEngine\src\gold_parser_5.pas"/>
-        <UnitName Value="Gold_Parser_5"/>
+        <Filename Value="C:\bin\lazarus2\fpc\3.2.2\source\packages\rtl-generics\src\generics.collections.pas"/>
+        <UnitName Value="Generics.Collections"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
+        <TopLine Value="1163"/>
+        <CursorPos Y="1173"/>
+        <UsageCount Value="8"/>
       </Unit9>
       <Unit10>
-        <Filename Value="..\deps\GoldEngine\src\production.pas"/>
-        <UnitName Value="Production"/>
+        <Filename Value="C:\bin\lazarus2\fpc\3.2.2\source\rtl\inc\objpash.inc"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="25" Y="17"/>
+        <TopLine Value="209"/>
+        <CursorPos X="23" Y="215"/>
         <UsageCount Value="10"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit10>
       <Unit11>
-        <Filename Value="C:\bin\lazarus\fpc\3.2.0\source\rtl\objpas\objpas.pp"/>
+        <Filename Value="C:\bin\lazarus2\fpc\3.2.2\source\rtl\objpas\sysutils\sysutilh.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="135"/>
-        <CursorPos X="15" Y="148"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="320"/>
+        <CursorPos X="17" Y="331"/>
+        <UsageCount Value="8"/>
       </Unit11>
       <Unit12>
-        <Filename Value="C:\bin\lazarus\fpc\3.2.0\source\rtl\objpas\sysutils\sysutilh.inc"/>
+        <Filename Value="C:\bin\lazarus2\fpc\3.2.2\source\rtl\inc\objpas.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="28"/>
-        <CursorPos X="27" Y="42"/>
+        <TopLine Value="331"/>
+        <CursorPos X="12" Y="334"/>
         <UsageCount Value="10"/>
       </Unit12>
-      <Unit13>
-        <Filename Value="..\deps\GoldEngineTestGUI\MainForm.pas"/>
-        <ComponentName Value="Main"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="47"/>
-        <CursorPos X="42" Y="84"/>
-        <UsageCount Value="11"/>
-        <Loaded Value="True"/>
-      </Unit13>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="41" TopLine="28"/>
+        <Filename Value="uAteBcTests.pas"/>
+        <Caret Line="100" Column="16" TopLine="100"/>
       </Position1>
       <Position2>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="42" TopLine="28"/>
+        <Filename Value="uAteBcTests.pas"/>
+        <Caret Line="28" Column="9" TopLine="20"/>
       </Position2>
       <Position3>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="43" TopLine="28"/>
+        <Filename Value="uAteBcTests.pas"/>
+        <Caret Line="117" Column="5" TopLine="111"/>
       </Position3>
       <Position4>
         <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="68" Column="15" TopLine="54"/>
+        <Caret Line="25" Column="15" TopLine="21"/>
       </Position4>
       <Position5>
         <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="67" TopLine="54"/>
+        <Caret Line="78" Column="3" TopLine="73"/>
       </Position5>
       <Position6>
         <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="68" TopLine="54"/>
+        <Caret Line="26" Column="15" TopLine="18"/>
       </Position6>
       <Position7>
         <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="66" TopLine="54"/>
+        <Caret Line="95" Column="4" TopLine="92"/>
       </Position7>
       <Position8>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="41" TopLine="36"/>
+        <Filename Value="uAteBcTests.pas"/>
+        <Caret Line="27" Column="15" TopLine="19"/>
       </Position8>
       <Position9>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="42" TopLine="36"/>
+        <Filename Value="uAteBcTests.pas"/>
+        <Caret Line="103" Column="3" TopLine="97"/>
       </Position9>
       <Position10>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="43" TopLine="36"/>
+        <Filename Value="uAteBcTests.pas"/>
+        <Caret Line="28" Column="15" TopLine="20"/>
       </Position10>
       <Position11>
         <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="69" Column="10" TopLine="54"/>
+        <Caret Line="23" Column="20" TopLine="22"/>
       </Position11>
       <Position12>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="16" Column="10" TopLine="3"/>
+        <Filename Value="uAteBcTests.pas"/>
+        <Caret Line="61" Column="9" TopLine="50"/>
       </Position12>
       <Position13>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="70" Column="20" TopLine="54"/>
+        <Filename Value="Ast.pas"/>
+        <Caret Line="59" Column="20" TopLine="51"/>
       </Position13>
       <Position14>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="15" Column="10" TopLine="2"/>
+        <Filename Value="Ast.pas"/>
+        <Caret Line="160" Column="3" TopLine="149"/>
       </Position14>
-      <Position15>
-        <Filename Value="..\deps\GoldEngineTestGUI\GOLDParser.pas"/>
-        <Caret Line="37" Column="14" TopLine="24"/>
-      </Position15>
-      <Position16>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="69" TopLine="50"/>
-      </Position16>
-      <Position17>
-        <Filename Value="AteBsTests.lpr"/>
-        <Caret Line="22" TopLine="2"/>
-      </Position17>
-      <Position18>
-        <Filename Value="AteBsTests.lpr"/>
-        <Caret Line="23" TopLine="2"/>
-      </Position18>
-      <Position19>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="66" TopLine="53"/>
-      </Position19>
-      <Position20>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="67" TopLine="53"/>
-      </Position20>
-      <Position21>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="68" TopLine="53"/>
-      </Position21>
-      <Position22>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="66" TopLine="53"/>
-      </Position22>
-      <Position23>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="67" TopLine="53"/>
-      </Position23>
-      <Position24>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="68" TopLine="53"/>
-      </Position24>
-      <Position25>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="53" TopLine="48"/>
-      </Position25>
-      <Position26>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="54" TopLine="48"/>
-      </Position26>
-      <Position27>
-        <Filename Value="Engine.pas"/>
-        <Caret Line="42" Column="41" TopLine="42"/>
-      </Position27>
-      <Position28>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="68" TopLine="53"/>
-      </Position28>
-      <Position29>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="74" Column="16" TopLine="53"/>
-      </Position29>
-      <Position30>
-        <Filename Value="uAteBcTests.pas"/>
-        <Caret Line="22" Column="15" TopLine="9"/>
-      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -253,16 +180,20 @@
         </Mode0>
       </Modes>
     </RunParams>
+    <HistoryLists Count="2">
+      <List0 Name="LaunchingApplication" Type="File" Count="1">
+        <Item1 Value="C:\WINDOWS\system32\cmd.exe /C ${TargetCmdLine}"/>
+      </List0>
+      <List1 Name="CommandLineParameters" Count="1">
+        <Item1 Value="--format=plain -a -p"/>
+      </List1>
+    </HistoryLists>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="1">
-      <Item1>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="Engine.pas"/>
-        <Line Value="55"/>
-      </Item1>
-    </BreakPoints>
+    <Watches>
+      <Item>
+        <Expression Value="expr"/>
+      </Item>
+    </Watches>
   </Debugging>
 </CONFIG>

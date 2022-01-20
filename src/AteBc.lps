@@ -4,22 +4,18 @@
     <PathDelim Value="\"/>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="5">
+    <Units Count="7">
       <Unit0>
         <Filename Value="AteBc.lpr"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="57"/>
-        <CursorPos X="47" Y="62"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="38" Y="8"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="Engine.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
         <UsageCount Value="20"/>
       </Unit1>
       <Unit2>
@@ -32,26 +28,42 @@
         <UsageCount Value="20"/>
       </Unit2>
       <Unit3>
+        <Filename Value="Ast.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="31" Y="10"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
         <Filename Value="..\deps\GoldEngineTestGUI\GOLDParser.pas"/>
         <EditorIndex Value="1"/>
         <TopLine Value="19"/>
         <CursorPos X="47" Y="28"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
-      </Unit3>
-      <Unit4>
+      </Unit4>
+      <Unit5>
         <Filename Value="..\deps\GoldEngineTestGUI\MainForm.pas"/>
         <ComponentName Value="Main"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="51"/>
         <CursorPos X="17" Y="57"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
-      </Unit4>
+      </Unit5>
+      <Unit6>
+        <Filename Value="Interpreter.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit6>
     </Units>
     <JumpHistory Count="4" HistoryIndex="3">
       <Position1>

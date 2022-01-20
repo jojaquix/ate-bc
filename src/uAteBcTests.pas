@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
-  Engine, Status, Ast;
+  Interpreter, Status, Ast;
 
 type
 
@@ -20,6 +20,7 @@ type
     procedure SetUp; override;
     procedure TearDown; override;
   published
+    procedure TestFreeOnNull;
     procedure EvaluateIntLiteral;
     procedure TestStatuses;
     procedure TestLoadTables;
@@ -46,6 +47,21 @@ end;
 procedure TAteBcTests.TearDown;
 begin
 
+end;
+
+procedure TAteBcTests.TestFreeOnNull;
+var
+  stp1: ^TStatus;
+  e: TExpression;
+begin
+  stp1 := nil;
+  e := nil;
+
+  { show free on nils is safe }
+  e.Free;
+  { for value types is not safe }
+  if Assigned(stp1) then
+     Dispose(stp1);
 end;
 
 procedure TAteBcTests.EvaluateIntLiteral;

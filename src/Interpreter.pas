@@ -1,4 +1,4 @@
-unit Engine;
+unit Interpreter;
 
 {$mode objfpc}{$H+}
 
@@ -12,17 +12,25 @@ uses
   Token,
   Ast;
 
-{ For Testing only }
-
-function checkTree(): TStatus;
-
-{ generate the ast from parse tree }
-function generateAst(tred: TReduction; tast: TExpression): TStatus;
 
 { Engine Api functions }
 
 function loadTables(tablesFilePath: string): TStatus;
 function parse(prg: string): TStatus;
+
+{ For Testing only }
+
+function checkTree(): TStatus;
+
+function visit(expr: TExpression): TStatus;
+//may be use generic functions for ast eval
+
+//generic function Add<T, T2>(const A: T; const B: T2): T;
+
+{ generate the ast from parse tree }
+function generateAst(tred: TReduction; tast: TExpression): TStatus;
+
+
 
 
 
@@ -80,6 +88,42 @@ begin
     Result := Failure('Parse Failed:' + parser.Log);
 end;
 
+{ post-order traversal }
+function visit(expr: TExpression): TStatus;
+var
+  e: TExpression;
+begin
+  writeln;
+  if Assigned(expr.expParams) then
+    for e in expr.expParams do
+    begin
+      visit(e);
+    end;
+
+  //post order actions
+  case expr.kind of
+    keIntVal:
+    begin
+      writeln('evaluating kIntVal', expr.strValue);
+      expr.Value.kind:=kvInt;
+      expr.Value.intValue := StrToInt(expr.strValue);
+    end;
+
+    keIntSum:
+    begin
+      writeln('evaluating kIntSum');
+      expr.Value.kind := kvInt;
+      expr.Value.intValue :=
+        (expr[0].Value.intValue +
+        expr[1].Value.intValue);
+    end;
+  end;
+end;
+{ to dont forget generic functions }
+generic function Add<T, T2>(const A: T; const B: T2): T;
+begin
+  Result := A;
+end;
 
 function generateAst(tred: TReduction; tast: TExpression): TStatus;
 begin

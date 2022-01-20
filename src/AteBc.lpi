@@ -35,17 +35,16 @@
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="Engine.pas"/>
+        <Filename Value="Status.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="Status.pas"/>
+        <Filename Value="Ast.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit2>
       <Unit3>
-        <Filename Value="Ast.pas"/>
+        <Filename Value="Interpreter.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="Ast"/>
       </Unit3>
     </Units>
   </ProjectOptions>
