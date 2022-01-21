@@ -18,6 +18,9 @@ uses
 function loadTables(tablesFilePath: string): TStatus;
 function parse(prg: string): TStatus;
 
+{ eval functions here ??}
+
+
 { For Testing only }
 
 function checkTree(): TStatus;
@@ -29,7 +32,6 @@ function visit(expr: TExpression): TStatus;
 
 { generate the ast from parse tree }
 function generateAst(tred: TReduction; tast: TExpression): TStatus;
-
 
 
 
@@ -105,7 +107,7 @@ begin
     keIntVal:
     begin
       writeln('evaluating kIntVal', expr.strValue);
-      expr.Value.kind:=kvInt;
+      expr.Value.kind := kvInt;
       expr.Value.intValue := StrToInt(expr.strValue);
     end;
 
@@ -114,11 +116,11 @@ begin
       writeln('evaluating kIntSum');
       expr.Value.kind := kvInt;
       expr.Value.intValue :=
-        (expr[0].Value.intValue +
-        expr[1].Value.intValue);
+        (expr[0].Value.intValue + expr[1].Value.intValue);
     end;
   end;
 end;
+
 { to dont forget generic functions }
 generic function Add<T, T2>(const A: T; const B: T2): T;
 begin
