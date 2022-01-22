@@ -10,10 +10,10 @@ uses
   Status,
   GOLDParser,
   Token,
+  AteTypes,
   Ast;
 
-
-{ Engine Api functions }
+{  Api functions }
 
 function loadTables(tablesFilePath: string): TStatus;
 function parse(prg: string): TStatus;
@@ -25,13 +25,13 @@ function parse(prg: string): TStatus;
 
 function checkTree(): TStatus;
 
-function visit(expr: TExpression): TStatus;
+function eval(expr: TExpr): TAteVal;
 //may be use generic functions for ast eval
 
 //generic function Add<T, T2>(const A: T; const B: T2): T;
 
 { generate the ast from parse tree }
-function generateAst(tred: TReduction; tast: TExpression): TStatus;
+function generateAst(tred: TReduction; tast: TExpr): TStatus;
 
 
 
@@ -90,33 +90,22 @@ begin
     Result := Failure('Parse Failed:' + parser.Log);
 end;
 
-{ post-order traversal }
-function visit(expr: TExpression): TStatus;
-var
-  e: TExpression;
+function eval(expr: TExpr): TAteVal;
 begin
   writeln;
-  if Assigned(expr.expParams) then
-    for e in expr.expParams do
-    begin
-      visit(e);
-    end;
-
-  //post order actions
   case expr.kind of
-    keIntVal:
+    etIntVal:
     begin
-      writeln('evaluating kIntVal', expr.strValue);
-      expr.Value.kind := kvInt;
-      expr.Value.intValue := StrToInt(expr.strValue);
+      Result.kind := vkInt;
+      Result.intVal := StrToInt(expr.strVal);
+      exit;
     end;
 
-    keIntSum:
+    etIntSum:
     begin
-      writeln('evaluating kIntSum');
-      expr.Value.kind := kvInt;
-      expr.Value.intValue :=
-        (expr[0].Value.intValue + expr[1].Value.intValue);
+      Result.kind := vkInt;
+      Result.intVal :=
+        eval(expr[0]).intVal + eval(expr[1]).intVal;
     end;
   end;
 end;
@@ -127,7 +116,8 @@ begin
   Result := A;
 end;
 
-function generateAst(tred: TReduction; tast: TExpression): TStatus;
+function generateAst(tred: TReduction; tast: TExpr): TStatus;
+
 begin
 
   // traverse and generate ast

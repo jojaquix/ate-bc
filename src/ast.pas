@@ -1,4 +1,5 @@
 unit Ast;
+
 {
  Ast module, defines the types (and methods, helpers ets)
  to build an AST that will be evaluated for the interpreter
@@ -15,36 +16,25 @@ interface
 
 uses
   Classes, SysUtils, Generics.Collections,
-  status;
+  Status, AteTypes;
 
 type
   { exp types that comes from parser}
-  TExpTypes = (keEmpty, keIntVal, keIntSum, keIntProd);
-
-
-type
-  { Used after eval the ast nodes }
-  TValTypes = (kvEmpty, kvInt, kvReal);
-
-
-type
-  { TValue }
-  TValue = record
-    class operator Initialize(var val: TValue);
-    case kind: TValTypes of
-      kvInt: (intValue: integer);
-      kvReal: (realValue: double);
-  end;
+  TExprTypes = (
+    etEmpty,
+    etIntVal,
+    etIntSum,
+    etIntProd);
 
 //forward dec
 type
-  TExpression = class;
+  TExpr = class;
 
 type
-  TExpParams = specialize TObjectList<TExpression>;//this can own childrens
+  TExpParams = specialize TObjectList<TExpr>;//this can own childrens
 
 
-{ TExpression }
+{ TExpr }
 {
  for now is public just for testing
  maybe values should be properties
@@ -53,62 +43,47 @@ type
  state
 }
 type
-  TExpression = class  //expresion own its childrens
-  private
+  TExpr = class  //expression own its childrens
 
-    function GetParam(index: Integer): TExpression;
+  private
+    function GetParam(index: integer): TExpr;
 
   public
-    kind: TExpTypes;
+    kind: TExprTypes;
     expParams: TExpParams;
-    strValue: string;
-    Value: TValue;
+    strVal: string;
 
     constructor Create;
-    constructor Create(exType: TExpTypes; sval: string);
-    constructor Create(exType: TExpTypes; args: array of TExpression);
+    constructor Create(exType: TExprTypes; sval: string);
+    constructor Create(exType: TExprTypes; args: array of TExpr);
     destructor Destroy; override;
 
-    property Param[index : Integer]: TExpression read GetParam; default;
-
-
-  private
+    property Param[index: integer]: TExpr read GetParam; default;
 
 
   end;
 
 
-
-
 implementation
 
 
+{ TExpr }
 
-{ TValue }
-
-class operator TValue.Initialize(var val: TValue);
-begin
-  val.kind := TValTypes.kvEmpty;
-end;
-
-{ TExpression }
-
-
-constructor TExpression.Create;
+constructor TExpr.Create;
 begin
   inherited Create();
-  self.kind := keEmpty;
+  self.kind := etEmpty;
 end;
 
 
-constructor TExpression.Create(exType: TExpTypes; sval: string);
+constructor TExpr.Create(exType: TExprTypes; sval: string);
 begin
   inherited Create();
   self.kind := exType;
-  self.strValue := sval;
+  self.strVal := sval;
 end;
 
-constructor TExpression.Create(exType: TExpTypes; args: array of TExpression);
+constructor TExpr.Create(exType: TExprTypes; args: array of TExpr);
 var
   i: integer;
 begin
@@ -121,16 +96,16 @@ begin
   end;
 end;
 
-destructor TExpression.Destroy;
+destructor TExpr.Destroy;
 begin
   if Assigned(expParams) then
     FreeAndNil(expParams);
   inherited;
 end;
 
-function TExpression.GetParam(index: Integer): TExpression;
+function TExpr.GetParam(index: integer): TExpr;
 begin
-  Result:= self.expParams[index];
+  Result := self.expParams[index];
 end;
 
 end.

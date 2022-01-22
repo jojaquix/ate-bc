@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
-  Interpreter, Status, Ast;
+  Interpreter, Status, Ast, AteTypes;
 
 type
 
@@ -52,7 +52,7 @@ end;
 procedure TAteBcTests.TestFreeOnNull;
 var
   stp1: ^TStatus;
-  e: TExpression;
+  e: TExpr;
 begin
   stp1 := nil;
   e := nil;
@@ -113,15 +113,20 @@ end;
 
 procedure TAteBcTests.TestAst;
 var
-  exp1, val1, val2: TExpression;
-  res: TStatus;
+  exp1, val1, val2: TExpr;
+  res: TAteVal;
 begin
-  val1:= TExpression.Create(keIntVal, '5');
-  val2:= TExpression.Create(keIntVal, '2');
-  exp1 := TExpression.Create(keIntSum, [val1, val2]);
+  val1:= TExpr.Create(etIntVal, '5');
+  val2:= TExpr.Create(etIntSum,
+          [
+           TExpr.Create(etIntVal, '3'),
+           TExpr.Create(etIntVal, '2')
+           ]);
 
-  res:= visit(exp1);
-  AssertTrue(exp1.value.intValue = 7);
+  exp1 := TExpr.Create(etIntSum, [val1, val2]);
+
+  res:= eval(exp1);
+  AssertTrue(res.intVal = 10);
 
   FreeAndNil(exp1);
 

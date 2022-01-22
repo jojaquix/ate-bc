@@ -29,7 +29,7 @@
         <PackageName Value="Gold_Parser_5"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="AteBc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -46,6 +46,10 @@
         <Filename Value="Interpreter.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="AteTypes.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit4>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
