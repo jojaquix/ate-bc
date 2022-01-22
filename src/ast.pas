@@ -5,7 +5,6 @@ unit Ast;
  to build an AST that will be evaluated for the interpreter
  for now:
      * TExpression -> node of the AST
-     * TValue -> the value of an evaluated TExpression
 }
 
 {$mode ObjFPC}{$H+}
@@ -50,7 +49,7 @@ type
 
   public
     kind: TExprTypes;
-    expParams: TExpParams;
+    params: TExpParams;
     strVal: string;
 
     constructor Create;
@@ -62,6 +61,8 @@ type
 
 
   end;
+
+{ Make helper functions here ? }
 
 
 implementation
@@ -89,23 +90,23 @@ var
 begin
   inherited Create();
   self.kind := exType;
-  self.expParams := TExpParams.Create(True);
+  self.params := TExpParams.Create(True);
   for i := Low(args) to High(args) do
   begin
-    self.expParams.Add(args[i]);
+    self.params.Add(args[i]);
   end;
 end;
 
 destructor TExpr.Destroy;
 begin
-  if Assigned(expParams) then
-    FreeAndNil(expParams);
+  if Assigned(params) then
+    FreeAndNil(params);
   inherited;
 end;
 
 function TExpr.GetParam(index: integer): TExpr;
 begin
-  Result := self.expParams[index];
+  Result := self.params[index];
 end;
 
 end.

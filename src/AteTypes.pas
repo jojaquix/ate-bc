@@ -19,6 +19,7 @@ type
 
 type
   { TAteVal }
+  { * TAteVal -> the value of an evaluated TExpression }
   TAteVal = record
     class operator Initialize(var val: TAteVal);
     case kind: TValKind of

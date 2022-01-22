@@ -10,6 +10,7 @@ uses
   Status,
   GOLDParser,
   Token,
+  Gold_Types,
   AteTypes,
   Ast;
 
@@ -31,7 +32,7 @@ function eval(expr: TExpr): TAteVal;
 //generic function Add<T, T2>(const A: T; const B: T2): T;
 
 { generate the ast from parse tree }
-function generateAst(tred: TReduction; tast: TExpr): TStatus;
+function generateAst(tast: TExpr; tred: TReduction): TStatus;
 
 
 
@@ -50,16 +51,7 @@ var
   i: integer;
 begin
   tree := parser.CurrentReduction;
-  writeln('Showing the reduction to see');
-  //writeln(parser.StrTree);
-
-  for i := 0 to tree.Count - 1 do
-  begin
-    writeln('Name: ', tree[i].Name,
-      ' type: ', IntToStr(Ord(tree[i].SymbolType)),
-      ' data:', tree[i].Data,
-      ' str: ', tree[i].ToString);
-  end;
+  generateAst(nil, tree);
 
 end;
 
@@ -116,13 +108,38 @@ begin
   Result := A;
 end;
 
-function generateAst(tred: TReduction; tast: TExpr): TStatus;
+function generateAst(tast: TExpr; tred: TReduction): TStatus;
+var
+  k: integer;
+
+  // Example of TToken values for a given grammar
+  // node.Name = 'IntegerLiteral', '*'
+  // node.Data = '5', '*'
+  // node.SymbolType = see TSymbolType in gold_types unit
+  procedure processNode(node: TToken);
+  begin
+    writeln('Name: ', node.Name,
+      ' type: ', IntToStr(Ord(node.SymbolType)),
+      ' data:', node.Data);
+  end;
+
+  procedure visit(tred: TReduction);
+  var
+    i: integer;
+  begin
+    for i := 0 to tred.Count - 1 do
+      // here will go ALL types from parser
+      // and generate AteAst
+      case tred[i].SymbolType of
+        stNON_TERMINAL:
+          visit(tred[i].Reduction);
+        else
+          processNode(tred[i]);
+      end;
+  end;
 
 begin
-
-  // traverse and generate ast
-  // this function looks like will
-  // be large
+  visit(tred);
 
 end;
 

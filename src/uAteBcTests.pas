@@ -109,6 +109,7 @@ end;
 procedure TAteBcTests.TestGenFunction;
 begin
    //AssertTrue(specialize Add<Integer, String>(3,'Cadena') = 3);
+
 end;
 
 procedure TAteBcTests.TestAst;
@@ -127,6 +128,8 @@ begin
 
   res:= eval(exp1);
   AssertTrue(res.intVal = 10);
+
+
 
   FreeAndNil(exp1);
 
