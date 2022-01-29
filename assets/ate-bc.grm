@@ -7,17 +7,16 @@
 
 "Start Symbol" = <Exp>
                   
-IntegerLiteral = {Number}|{Number}+
-
+IntLiteral = {Number}|{Number}+
+                    
 <Exp> ::= <Term> '+' <Exp>
             | <Term> '-' <Exp>
             | <Term>
-
-               
+          
 <Term> ::= <Factor> '/' <Term>            
             | <Factor> '*' <Term>
             | <Factor>
 
-<Factor> ::= IntegerLiteral
-          | '-' IntegerLiteral 
+<Factor> ::= IntLiteral
+          | '-' IntLiteral 
 

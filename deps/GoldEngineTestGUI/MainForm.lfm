@@ -1,7 +1,7 @@
 object Main: TMain
-  Left = 365
+  Left = 364
   Height = 545
-  Top = 113
+  Top = 101
   Width = 578
   BorderStyle = bsSingle
   Caption = 'Test The Grammar - Free Pascal Version'
@@ -12,7 +12,7 @@ object Main: TMain
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
-  LCLVersion = '2.0.12.0'
+  LCLVersion = '2.2.0.4'
   object GroupBox1: TGroupBox
     Left = 0
     Height = 200
@@ -73,7 +73,6 @@ object Main: TMain
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Quality = fqCleartype
-        ParentColor = False
         ParentFont = False
       end
     end
@@ -95,7 +94,6 @@ object Main: TMain
         Width = 574
         Align = alTop
         Caption = 'Test Input'
-        ParentColor = False
       end
       object txtTestInput: TMemo
         Left = 0

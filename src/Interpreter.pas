@@ -49,10 +49,16 @@ function checkTree: TStatus;
 var
   tree: TReduction;
   i: integer;
+  aAst: TExpr;
 begin
   tree := parser.CurrentReduction;
-  generateAst(nil, tree);
-
+  aAst := nil;
+  try
+    aAst := TExpr.Create;
+    generateAst(aAst, tree);
+  finally
+    FreeAndNil(aAst);
+  end;
 end;
 
 
@@ -110,36 +116,45 @@ end;
 
 function generateAst(tast: TExpr; tred: TReduction): TStatus;
 var
-  k: integer;
+  level: integer;
 
   // Example of TToken values for a given grammar
   // node.Name = 'IntegerLiteral', '*'
   // node.Data = '5', '*'
   // node.SymbolType = see TSymbolType in gold_types unit
-  procedure processNode(node: TToken);
-  begin
-    writeln('Name: ', node.Name,
-      ' type: ', IntToStr(Ord(node.SymbolType)),
-      ' data:', node.Data);
-  end;
 
-  procedure visit(tred: TReduction);
+  procedure visit(tred: TReduction; tast: TExpr);
   var
     i: integer;
   begin
+    inc(level);
     for i := 0 to tred.Count - 1 do
-      // here will go ALL types from parser
-      // and generate AteAst
-      case tred[i].SymbolType of
-        stNON_TERMINAL:
-          visit(tred[i].Reduction);
-        else
-          processNode(tred[i]);
+      if not (tred[i].SymbolType in [stNON_TERMINAL]) then
+      begin
+        writeln('Name: ', tred[i].Name,
+           ' Type: ', IntToStr(Ord(tred[i].SymbolType)),
+           ' Data: ', tred[i].Data,
+           ' Index: ', i,
+           ' Level: ', level);
+
+        //case tred[i].Name of
+          //'+': tast.AddParam(CESum(()));
+
+
+        //end
+
       end;
+
+    for i := 0 to tred.Count - 1 do
+      if(Assigned(tred[i].Reduction)) then
+        visit(tred[i].Reduction, tast);
+
+    dec(level);
   end;
 
 begin
-  visit(tred);
+  level := 0;
+  visit(tred, tast);
 
 end;
 

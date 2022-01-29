@@ -25,6 +25,7 @@ type
     etIntSum,
     etIntProd);
 
+
 //forward dec
 type
   TExpr = class;
@@ -57,12 +58,32 @@ type
     constructor Create(exType: TExprTypes; args: array of TExpr);
     destructor Destroy; override;
 
+    function AddParam(expr: TExpr): TExpr;
+
     property Param[index: integer]: TExpr read GetParam; default;
 
 
   end;
 
+
+type
+  TExprItem = class
+
+  end;
+
+type
+  TAteExprStack = class(specialize TStack<TExprItem>)
+
+  end;
+
+
 { Make helper functions here ? }
+function CEInt(data : String) : TExpr;
+function CESum : TExpr;
+function CESum(a , b : TExpr) : TExpr;
+function CEProd: TExpr;
+function CEProd(a , b : TExpr) : TExpr;
+
 
 
 implementation
@@ -104,9 +125,43 @@ begin
   inherited;
 end;
 
+function TExpr.AddParam(expr: TExpr): TExpr;
+begin
+  params.Add(expr);
+  Result:=expr;
+end;
+
 function TExpr.GetParam(index: integer): TExpr;
 begin
   Result := self.params[index];
+end;
+
+{ Helper functions for expression creation }
+function CEInt(data : String) : TExpr;
+begin
+    Result := TExpr.Create(etIntVal, data);
+end;
+
+function CESum: TExpr;
+begin
+  Result := TExpr.Create;
+  Result.kind:=etIntSum;
+end;
+
+function CESum(a , b : TExpr) : TExpr;
+begin
+    Result := TExpr.Create(etIntSum, [a, b]);
+end;
+
+function CEProd: TExpr;
+begin
+  Result := TExpr.Create;
+  Result.kind:=etIntProd;
+end;
+
+function CEProd(a, b: TExpr): TExpr;
+begin
+  Result := TExpr.Create(etIntProd, [a, b]);
 end;
 
 end.

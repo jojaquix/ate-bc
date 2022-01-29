@@ -98,10 +98,11 @@ begin
   AssertTrue(st2.Code = 0);
   AssertTrue(st2.Message = 'Ok');
 
-  st3 := parse('5*4');
+  st3 := parse('3*5+2*6');
   AssertTrue(st3.Code = 0);
   AssertTrue(st3.Message = 'Ok');
 
+  writeln;
   checkTree();
 
 end;
