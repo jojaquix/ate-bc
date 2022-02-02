@@ -3,7 +3,8 @@ program AteBsTests;
 {$mode objfpc}{$H+}
 
 uses
-  Classes, consoletestrunner, uAteBcTests, Status, Ast, GOLDParser, AteTypes;
+  Classes, consoletestrunner, uAteBcTests, Status, AteAst, GOLDParser, AteTypes,
+  AteParser;
 
 type
 

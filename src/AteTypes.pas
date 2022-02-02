@@ -21,7 +21,6 @@ type
 
 type
   { TAteVal }
-  { * TAteVal -> the value of an evaluated TExpression }
   TAteVal = record
     class operator Initialize(var val: TAteVal);
     case kind: TValKind of
@@ -29,12 +28,13 @@ type
       vkReal: (realVal: double);
   end;
 
+type
   { Base Class for all Ate Objects}
   TAteObj = class
 
   end;
 
-  { Interpreter stack is for now is owner of TAteObj's}
+  { Interpreter stack}
   TAteStack =  class(specialize TStack<TAteVal>)
 
   end;

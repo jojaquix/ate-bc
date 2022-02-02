@@ -5,7 +5,7 @@ program AteBc;
 uses {$IFDEF UNIX} {$IFDEF UseCThreads}
   cthreads, {$ENDIF} {$ENDIF}
   Classes,
-  SysUtils, Ast,
+  SysUtils,
   CustApp;
 
 type

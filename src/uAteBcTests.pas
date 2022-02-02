@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
-  Interpreter, Status, Ast, AteTypes;
+  Interpreter, Status, AteAst, AteTypes, AteParser;
 
 type
 
@@ -25,7 +25,6 @@ type
     procedure TestStatuses;
     procedure TestLoadTables;
     procedure TestGenFunction;
-    procedure TestAst;
     procedure TestAstGen;
   end;
 
@@ -52,7 +51,7 @@ end;
 procedure TAteBcTests.TestFreeOnNull;
 var
   stp1: ^TStatus;
-  e: TExpr;
+  e: TStream;
 begin
   stp1 := nil;
   e := nil;
@@ -103,44 +102,47 @@ begin
   AssertTrue(st3.Message = 'Ok');
 
   writeln;
-  checkTree();
 
 end;
 
 procedure TAteBcTests.TestGenFunction;
 begin
    //AssertTrue(specialize Add<Integer, String>(3,'Cadena') = 3);
-
 end;
 
-procedure TAteBcTests.TestAst;
-var
-  exp1, val1, val2: TExpr;
-  res: TAteVal;
-begin
-  val1:= TExpr.Create(etIntVal, '5');
-  val2:= TExpr.Create(etIntSum,
-          [
-           TExpr.Create(etIntVal, '3'),
-           TExpr.Create(etIntVal, '2')
-           ]);
-
-  exp1 := TExpr.Create(etIntSum, [val1, val2]);
-
-  res:= eval(exp1);
-  AssertTrue(res.intVal = 10);
-
-
-
-  FreeAndNil(exp1);
-
-end;
 
 procedure TAteBcTests.TestAstGen;
+var
+  i: integer;
+  res: TAteVal;
+  expList: TExprList;
+  ateStack: TAteStack;
+  st2, st3, st: TStatus;
 begin
+  expList := nil;
+  ateStack := nil;
+  try
+    expList := TExprList.Create();
+    ateStack := TAteStack.Create();
+    writeln;
+    { why cant not load multiple times }
+    //st2 := loadTables('../assets/ate-bc.cgt');
+    AssertTrue(st2.Code = 0);
+    AssertTrue(st2.Message = 'Ok');
+    // fix asociativity ?
+    st3 := parse('10/5-2*4');
+    AssertTrue(st3.Code = 0);
+    AssertTrue(st3.Message = 'Ok');
 
-  //AssertTrue(exp1.value.intValue = 7);
-
+    writeln('Generating Ast2');
+    generateAst2(expList);
+    writeln('Expr Item coll size ', expList.Count);
+    st := eval(ateStack, expList);
+    writeLn('Valor en pila: ', ateStack.Peek.intVal, ' Size pila: ', ateStack.Count);
+  finally
+    FreeAndNil(ateStack);
+    FreeAndNil(expList);
+  end;
 end;
 
 
