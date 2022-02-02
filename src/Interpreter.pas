@@ -27,10 +27,11 @@ var
   expr: TExprItem;
   aux: TAteVal;
 begin
+  writeln('Evaluating stack ast');
   for i := exprColl.Count - 1 downto 0 do
   begin
     expr := exprColl[i];
-    writeln('Evaluating stack ast',
+    writeln('Index: ', i,
         ' Kind: ', IntToStr(Ord(expr.kind)),
         ' StrVal: ', expr.strVal);
 
@@ -74,6 +75,8 @@ begin
       end;
 
     end;
+
+    writeln('Result: ', ateStack.Peek.intVal);
   end;
 end;
 

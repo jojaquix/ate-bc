@@ -130,7 +130,7 @@ begin
     AssertTrue(st2.Code = 0);
     AssertTrue(st2.Message = 'Ok');
     // fix asociativity ?
-    st3 := parse('10/5-2*4');
+    st3 := parse('10-5+2*4');
     AssertTrue(st3.Code = 0);
     AssertTrue(st3.Message = 'Ok');
 

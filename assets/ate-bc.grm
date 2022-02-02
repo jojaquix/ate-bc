@@ -8,15 +8,20 @@
 "Start Symbol" = <Exp>
                   
 IntLiteral = {Number}|{Number}+
-                    
-<Exp> ::= <Term> '+' <Exp>
-            | <Term> '-' <Exp>
+           
+!left asoc                               
+<Exp> ::=  <Exp> '+' <Term>
+            | <Exp> '-' <Term>
             | <Term>
-          
-<Term> ::= <Factor> '/' <Term>            
-            | <Factor> '*' <Term>
+
+!left asoc          
+<Term> ::= <Term> '/' <Factor>             
+            | <Term> '*' <Factor> 
             | <Factor>
 
 <Factor> ::= IntLiteral
-          | '-' IntLiteral 
-
+           | <UnaryMinus> IntLiteral
+           | <UnaryPlus> IntLiteral
+           
+<UnaryMinus> ::= '-'
+<UnaryPlus> ::= '+'

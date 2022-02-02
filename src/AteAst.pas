@@ -71,12 +71,14 @@ function CISum: TExprItem; inline;
 begin
   //Result := TExprItem.Create;
   Result.kind:= etIntSum;
+  Result.strVal:= '+';
 end;
 
 function CISub: TExprItem; inline;
 begin
   //Result := TExprItem.Create;
   Result.kind:= etIntSub;
+  Result.strVal:= '-';
 end;
 
 
@@ -84,12 +86,14 @@ function CIProd: TExprItem; inline;
 begin
   //Result := TExprItem.Create;
   Result.kind:= etIntProd;
+  Result.strVal:= '*';
 end;
 
 function CIDiv: TExprItem; inline;
 begin
   //Result := TExprItem.Create;
   Result.kind:= etIntDiv;
+  Result.strVal:= '/';
 end;
 
 
@@ -123,31 +127,31 @@ var
         case tred[i].Name of
           '+':
           begin
-            writeln('Adding Sum');
+            //writeln('Adding Sum');
             expList.Add(CISum());
           end;
 
           '-':
           begin
-            writeln('Adding Sub');
+            //writeln('Adding Sub');
             expList.Add(CISub());
           end;
 
           '*':
           begin
-            writeln('Adding Prod');
+            //writeln('Adding Prod');
             expList.Add(CIProd());
           end;
 
           '/':
           begin
-            writeln('Adding Prod');
+            //writeln('Adding Prod');
             expList.Add(CIDiv());
           end;
 
           'IntLiteral':
           begin
-            writeln('Adding LitInt');
+            //writeln('Adding LitInt');
             expList.Add(CIInt(tred[i].Data));
           end;
         end;
