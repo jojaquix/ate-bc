@@ -6,11 +6,13 @@ unit AteTypes;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes,
+  SysUtils,
+  Generics.Collections;
 
 type
   { Used after eval the ast nodes }
-  { Here will be all types supported }
+  { Here will be all types supported or better classes ?}
   TValKind = (
     vkNil,
     vkInt,
@@ -25,6 +27,16 @@ type
     case kind: TValKind of
       vkInt:  (intVal: integer);
       vkReal: (realVal: double);
+  end;
+
+  { Base Class for all Ate Objects}
+  TAteObj = class
+
+  end;
+
+  { Interpreter stack is for now is owner of TAteObj's}
+  TAteStack =  class(specialize TStack<TAteVal>)
+
   end;
 
 

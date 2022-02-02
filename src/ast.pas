@@ -52,12 +52,14 @@ type
     kind: TExprTypes;
     params: TExpParams;
     strVal: string;
+    parent: TExpr;
 
-    constructor Create;
+    constructor Create(exType: TExprTypes = etEmpty);
     constructor Create(exType: TExprTypes; sval: string);
     constructor Create(exType: TExprTypes; args: array of TExpr);
     destructor Destroy; override;
 
+    //when a param is added this is the owner
     function AddParam(expr: TExpr): TExpr;
 
     property Param[index: integer]: TExpr read GetParam; default;
@@ -65,25 +67,29 @@ type
 
   end;
 
-
+{ better way to represent expression types i guess}
 type
-  TExprItem = class
-
+  TExprItem = record
+    kind: TExprTypes;
+    strVal: string;
   end;
 
 type
-  TAteExprStack = class(specialize TStack<TExprItem>)
+  TExprList = specialize TList<TExprItem>;
 
-  end;
 
 
 { Make helper functions here ? }
-function CEInt(data : String) : TExpr;
-function CESum : TExpr;
-function CESum(a , b : TExpr) : TExpr;
+function CEInt(Data: string): TExpr;
+function CESum: TExpr;
+function CESum(a, b: TExpr): TExpr;
 function CEProd: TExpr;
-function CEProd(a , b : TExpr) : TExpr;
+function CEProd(a, b: TExpr): TExpr;
 
+{ Expresion Items for que stack  }
+function CIInt(data: string): TExprItem;
+function CISum: TExprItem;
+function CIProd: TExprItem;
 
 
 implementation
@@ -91,16 +97,17 @@ implementation
 
 { TExpr }
 
-constructor TExpr.Create;
+constructor TExpr.Create(exType: TExprTypes = etEmpty);
 begin
   inherited Create();
-  self.kind := etEmpty;
+  self.params := TExpParams.Create(True);
+  self.kind := exType;
 end;
 
 
 constructor TExpr.Create(exType: TExprTypes; sval: string);
 begin
-  inherited Create();
+  Create();
   self.kind := exType;
   self.strVal := sval;
 end;
@@ -109,9 +116,8 @@ constructor TExpr.Create(exType: TExprTypes; args: array of TExpr);
 var
   i: integer;
 begin
-  inherited Create();
+  Create();
   self.kind := exType;
-  self.params := TExpParams.Create(True);
   for i := Low(args) to High(args) do
   begin
     self.params.Add(args[i]);
@@ -128,7 +134,8 @@ end;
 function TExpr.AddParam(expr: TExpr): TExpr;
 begin
   params.Add(expr);
-  Result:=expr;
+  expr.parent := self;
+  Result := expr;
 end;
 
 function TExpr.GetParam(index: integer): TExpr;
@@ -137,31 +144,50 @@ begin
 end;
 
 { Helper functions for expression creation }
-function CEInt(data : String) : TExpr;
+function CEInt(Data: string): TExpr;
 begin
-    Result := TExpr.Create(etIntVal, data);
+  Result := TExpr.Create(etIntVal, Data);
 end;
 
 function CESum: TExpr;
 begin
-  Result := TExpr.Create;
-  Result.kind:=etIntSum;
+  Result := TExpr.Create(etIntSum);
 end;
 
-function CESum(a , b : TExpr) : TExpr;
+function CESum(a, b: TExpr): TExpr;
 begin
-    Result := TExpr.Create(etIntSum, [a, b]);
+  Result := TExpr.Create(etIntSum, [a, b]);
 end;
 
 function CEProd: TExpr;
 begin
-  Result := TExpr.Create;
-  Result.kind:=etIntProd;
+  Result := TExpr.Create(etIntProd);
 end;
 
 function CEProd(a, b: TExpr): TExpr;
 begin
   Result := TExpr.Create(etIntProd, [a, b]);
 end;
+
+function CIInt(data: string): TExprItem;
+begin
+  //Result := TExprItem.Create;
+  Result.kind:= etIntVal;
+  Result.strVal:= data;
+end;
+
+function CISum: TExprItem;
+begin
+  //Result := TExprItem.Create;
+  Result.kind:= etIntSum;
+end;
+
+
+function CIProd: TExprItem;
+begin
+  //Result := TExprItem.Create;
+  Result.kind:= etIntProd;
+end;
+
 
 end.

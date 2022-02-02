@@ -98,7 +98,7 @@ begin
   AssertTrue(st2.Code = 0);
   AssertTrue(st2.Message = 'Ok');
 
-  st3 := parse('3*5+2*6');
+  st3 := parse('3*5+6*7');
   AssertTrue(st3.Code = 0);
   AssertTrue(st3.Message = 'Ok');
 
