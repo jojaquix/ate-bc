@@ -20,8 +20,8 @@ IntLiteral = {Number}|{Number}+
             | <Factor>
 
 <Factor> ::= IntLiteral
-           | <UnaryMinus> IntLiteral
-           | <UnaryPlus> IntLiteral
+           | <UnaryMinus> <Factor>
+           | <UnaryPlus> <Factor>
            
 <UnaryMinus> ::= '-'
 <UnaryPlus> ::= '+'

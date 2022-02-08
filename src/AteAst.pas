@@ -24,7 +24,8 @@ type
     etIntSum,
     etIntSub,
     etIntProd,
-    etIntDiv
+    etIntDiv,
+    etUnaryMinus
     );
 
 
@@ -42,11 +43,12 @@ type
 { Make helper functions here ? }
 
 { Expresion Items for que stack  }
-function CIInt(data: string): TExprItem;
-function CISum: TExprItem;
-function CISub: TExprItem;
-function CIProd: TExprItem;
-function CIDiv: TExprItem;
+function CIInt(data: string): TExprItem; inline;
+function CISum: TExprItem; inline;
+function CISub: TExprItem; inline;
+function CIProd: TExprItem; inline;
+function CIDiv: TExprItem; inline;
+function CIUnaryMinus: TExprItem; inline;
 
 
 { generate the ast from parse tree }
@@ -96,6 +98,12 @@ begin
   Result.strVal:= '/';
 end;
 
+function CIUnaryMinus: TExprItem;
+begin
+  Result.kind:= etUnaryMinus;
+  Result.strVal:= 'UnaryMinus';
+end;
+
 
 
 
@@ -103,71 +111,87 @@ end;
 { this function generate expList from perser reduction }
 function generateAst2(expList: TExprList): TStatus;
 var
-  level: integer;
+  level,unary: integer;
 
   // Example of TToken values for a given grammar
   // node.Name = 'IntegerLiteral', '*'
   // node.Data = '5', '*'
   // node.SymbolType = see TSymbolType in gold_types unit
 
-  procedure visit(tred: TReduction);
+  procedure visit(tred: TReduction; parentName: string);
   var
     i: integer;
   begin
     Inc(level);
-    for i := tred.Count - 1 downto 0  do
-      if not (tred[i].SymbolType in [stNON_TERMINAL]) then
-      begin
-        writeln('Name: ', tred[i].Name,
-          ' Type: ', IntToStr(Ord(tred[i].SymbolType)),
-          ' Data: ', tred[i].Data,
-          ' Index: ', i,
-          ' Level: ', level);
 
-        case tred[i].Name of
-          '+':
-          begin
-            //writeln('Adding Sum');
-            expList.Add(CISum());
-          end;
+    Writeln('Parent Name: ', parentName);
+    for i := tred.Count - 1 downto 0 do // for left asoc
+    //for i :=  0 to tred.Count - 1  do
+      //if not (tred[i].SymbolType in [stNON_TERMINAL]) then
+    begin
+      writeln('Name: ', tred[i].Name:10,
+        ' Type: ', IntToStr(Ord(tred[i].SymbolType)),
+        ' Data: ', tred[i].Data:10,
+        ' Index: ', i,
+        ' Level: ', level);
+      //if Assigned(tred[i].Reduction) and Assigned(tred[i].Reduction.Parent) then
+      // writeln('parent: ', tred[i].Reduction.Parent.ToString());
 
-          '-':
-          begin
-            //writeln('Adding Sub');
-            expList.Add(CISub());
-          end;
-
-          '*':
-          begin
-            //writeln('Adding Prod');
-            expList.Add(CIProd());
-          end;
-
-          '/':
-          begin
-            //writeln('Adding Prod');
-            expList.Add(CIDiv());
-          end;
-
-          'IntLiteral':
-          begin
-            //writeln('Adding LitInt');
-            expList.Add(CIInt(tred[i].Data));
-          end;
+      case tred[i].Name of
+        '+':
+        begin
+          //writeln('Adding Sum');
+          expList.Add(CISum());
         end;
 
+        '-':
+        begin
+          if Pos(parentName,'UnaryMinus') > 0 then
+          begin
+            expList.Add(CIUnaryMinus());
+            writeln('Adding Unary Minus')
+          end
+          else
+            expList.Add(CISub());
+        end;
+
+        '*':
+        begin
+          //writeln('Adding Prod');
+          expList.Add(CIProd());
+        end;
+
+        '/':
+        begin
+          //writeln('Adding Prod');
+          expList.Add(CIDiv());
+        end;
+
+        'IntLiteral':
+        begin
+          //writeln('Adding LitInt');
+          expList.Add(CIInt(tred[i].Data));
+        end;
+
+        'UnaryMinus':
+        begin
+          //writeln('Adding UnaryMinus');
+          //expList.Add(CIUnaryMinus());
+        end;
       end;
+    end;
+
 
     for i := tred.Count - 1 downto 0 do
+    //for i := 0 to tred.Count - 1 do
       if (Assigned(tred[i].Reduction)) then
-        visit(tred[i].Reduction);
-
+        visit(tred[i].Reduction, tred[i].Name);
     Dec(level);
   end;
 
 begin
   level := 0;
-  visit(AteParser.getCurrentReduction);
+  visit(AteParser.getCurrentReduction, '');
 end;
 
 

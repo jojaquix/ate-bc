@@ -27,8 +27,23 @@ var
   expr: TExprItem;
   aux: TAteVal;
 begin
-  writeln('Evaluating stack ast');
+
+  writeln('Content of Expr Collection');
+  writeln('==================================');
   for i := exprColl.Count - 1 downto 0 do
+   begin
+     expr := exprColl[i];
+     writeln('Index: ', i,
+         ' Kind: ', IntToStr(Ord(expr.kind)),
+         ' StrVal: ', expr.strVal);
+  end;
+  writeln('==================================');
+  writeln;
+
+
+  writeln('Evaluating ast using stack');
+  i:= exprColl.Count - 1;
+  while i >= 0 do
   begin
     expr := exprColl[i];
     writeln('Index: ', i,
@@ -55,9 +70,10 @@ begin
       begin
         aux.kind := vkInt;
         aux.intVal := ateStack.Pop.intVal;
-          aux.intVal := ateStack.Pop.intVal - aux.intVal;
+        aux.intVal := ateStack.Pop.intVal - aux.intVal;
         ateStack.Push(aux);
       end;
+
       etIntProd:
       begin
         aux.kind := vkInt;
@@ -74,9 +90,18 @@ begin
         ateStack.Push(aux);
       end;
 
+      etUnaryMinus:
+      begin
+        //writeln('Evaluating etUnaryMinus');
+        aux.kind := vkInt;
+        aux.intVal := -StrToInt(exprColl[i-1].strVal);
+        ateStack.Push(aux);
+        dec(i);
+      end;
     end;
 
     writeln('Result: ', ateStack.Peek.intVal);
+    dec(i);
   end;
 end;
 

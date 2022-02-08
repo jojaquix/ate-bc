@@ -14,6 +14,9 @@
       <Title Value="AteBsTests"/>
       <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
+      <Resources Count="1">
+        <Resource_0 FileName="..\assets\ate-bc.cgt" Type="RCDATA" ResourceName="ATE-BC"/>
+      </Resources>
     </General>
     <BuildModes Count="1">
       <Item1 Name="Default" Default="True"/>

@@ -90,10 +90,10 @@ procedure TAteBcTests.TestLoadTables;
 var
   st1, st2, st3: TStatus;
 begin
-  st1 := loadTables('');
-  AssertTrue(st1.Code <> 0);
+  //st1 := loadTables('');
+  //AssertTrue(st1.Code <> 0);
 
-  st2 := loadTables('../assets/ate-bc.cgt');
+  //st2 := loadTables('../assets/ate-bc.cgt');
   AssertTrue(st2.Code = 0);
   AssertTrue(st2.Message = 'Ok');
 
@@ -130,7 +130,8 @@ begin
     AssertTrue(st2.Code = 0);
     AssertTrue(st2.Message = 'Ok');
     // fix asociativity ?
-    st3 := parse('10-5+2*4');
+    st3 := parse('-5-12+2*4');
+    //st3 := parse('-5+8');
     AssertTrue(st3.Code = 0);
     AssertTrue(st3.Message = 'Ok');
 
