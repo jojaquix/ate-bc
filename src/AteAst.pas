@@ -124,16 +124,18 @@ var
   begin
     Inc(level);
 
-    Writeln('Parent Name: ', parentName);
+    //Writeln('Parent Name: ', parentName);
     for i := tred.Count - 1 downto 0 do // for left asoc
     //for i :=  0 to tred.Count - 1  do
       //if not (tred[i].SymbolType in [stNON_TERMINAL]) then
     begin
+      {$ifopt D+}
       writeln('Name: ', tred[i].Name:10,
         ' Type: ', IntToStr(Ord(tred[i].SymbolType)),
         ' Data: ', tred[i].Data:10,
         ' Index: ', i,
         ' Level: ', level);
+      {$endif}
       //if Assigned(tred[i].Reduction) and Assigned(tred[i].Reduction.Parent) then
       // writeln('parent: ', tred[i].Reduction.Parent.ToString());
 
@@ -149,7 +151,7 @@ var
           if Pos(parentName,'UnaryMinus') > 0 then
           begin
             expList.Add(CIUnaryMinus());
-            writeln('Adding Unary Minus')
+            //writeln('Adding Unary Minus')
           end
           else
             expList.Add(CISub());

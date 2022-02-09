@@ -4,8 +4,8 @@ program AteBc;
 
 uses {$IFDEF UNIX} {$IFDEF UseCThreads}
   cthreads, {$ENDIF} {$ENDIF}
-  Classes,
-  SysUtils,
+  Classes, SysUtils,
+  Interpreter, Status, AteAst, AteTypes, AteParser,
   CustApp;
 
 type
@@ -19,16 +19,21 @@ type
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
     procedure WriteHelp; virtual;
-  end;
+   end;
 
   { TAceBc }
 
   procedure TAteBc.DoRun;
   var
     ErrorMsg: string;
+    res: TAteVal;
+    expList: TExprList;
+    ateStack: TAteStack;
+    st: TStatus;
   begin
     // quick check parameters
-    ErrorMsg := CheckOptions('h', 'help');
+    {
+    ErrorMsg := CheckOptions('h',['help']);
     if ErrorMsg <> '' then
     begin
       ShowException(Exception.Create(ErrorMsg));
@@ -43,9 +48,22 @@ type
       Terminate;
       Exit;
     end;
+    }
 
     { add your program here }
-
+    expList := nil;
+    ateStack := nil;
+    try
+      expList := TExprList.Create();
+      ateStack := TAteStack.Create();
+      parse(argv[1]);
+      generateAst2(expList);
+      st := eval(ateStack, expList);
+      writeLn(ateStack.Peek.intVal);
+    finally
+      FreeAndNil(ateStack);
+      FreeAndNil(expList);
+    end;
     // stop program loop
     Terminate;
   end;
@@ -54,6 +72,7 @@ type
   begin
     inherited Create(TheOwner);
     StopOnException := True;
+
   end;
 
   destructor TAteBc.Destroy;
@@ -65,11 +84,19 @@ type
   begin
     { add your help code here }
     writeln('A Basic Calculator for command line');
-    writeln('Usage: ', ExeName, ' -h');
+    writeln('Usage: ');
+    writeln(ExeName, ' -h Show this help');
+    writeln('this program take first arg as expression to calc');
+    writeln(ExeName, ' 4*7-2');
   end;
+
+
 
 var
   Application: TAteBc;
+
+{$R *.res}
+
 begin
   Application := TAteBc.Create(nil);
   Application.Title := 'Basic Calc';

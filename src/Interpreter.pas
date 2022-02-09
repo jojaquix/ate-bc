@@ -27,7 +27,7 @@ var
   expr: TExprItem;
   aux: TAteVal;
 begin
-
+  {$ifopt D+}
   writeln('Content of Expr Collection');
   writeln('==================================');
   for i := exprColl.Count - 1 downto 0 do
@@ -39,17 +39,18 @@ begin
   end;
   writeln('==================================');
   writeln;
-
-
   writeln('Evaluating ast using stack');
+  {$endif}
   i:= exprColl.Count - 1;
   while i >= 0 do
   begin
     expr := exprColl[i];
+
+    {$ifopt D+}
     writeln('Index: ', i,
         ' Kind: ', IntToStr(Ord(expr.kind)),
         ' StrVal: ', expr.strVal);
-
+    {$endif}
     case expr.kind of
       etIntVal:
       begin
@@ -100,7 +101,7 @@ begin
       end;
     end;
 
-    writeln('Result: ', ateStack.Peek.intVal);
+    //writeln('Result: ', ateStack.Peek.intVal);
     dec(i);
   end;
 end;
