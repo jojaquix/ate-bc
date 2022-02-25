@@ -129,9 +129,8 @@ begin
     //st2 := loadTables('../assets/ate-bc.cgt');
     AssertTrue(st2.Code = 0);
     AssertTrue(st2.Message = 'Ok');
-    // fix asociativity ?
     st3 := parse('-5-12+2*4');
-    //st3 := parse('-5+8');
+    //st3 := parse('--5+8');
     AssertTrue(st3.Code = 0);
     AssertTrue(st3.Message = 'Ok');
 
@@ -139,7 +138,9 @@ begin
     generateAst2(expList);
     writeln('Expr Item coll size ', expList.Count);
     st := eval(ateStack, expList);
-    writeLn('Valor en pila: ', ateStack.Peek.intVal, ' Size pila: ', ateStack.Count);
+    if (ateStack.Count > 0) then
+       writeLn('Valor en pila: ', ateStack.Peek.intVal, ' Size pila: ', ateStack.Count);
+
   finally
     FreeAndNil(ateStack);
     FreeAndNil(expList);

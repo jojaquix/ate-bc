@@ -192,8 +192,11 @@ var
   end;
 
 begin
-  level := 0;
-  visit(AteParser.getCurrentReduction, '');
+  if(Assigned(AteParser.getCurrentReduction)) then
+  begin
+    level := 0;
+    visit(AteParser.getCurrentReduction, '');
+  end;
 end;
 
 

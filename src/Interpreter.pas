@@ -27,6 +27,10 @@ var
   expr: TExprItem;
   aux: TAteVal;
 begin
+
+  // exprColl is the input
+  if(exprColl.Count = 0 ) then exit;
+
   {$ifopt D+}
   writeln('Content of Expr Collection');
   writeln('==================================');
