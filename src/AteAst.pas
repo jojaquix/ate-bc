@@ -1,8 +1,10 @@
 unit AteAst;
 
 {
+ ==========================================================
  Ast module, defines the types (and methods, helpers ets)
  to build an AST that will be evaluated by the interpreter
+ ==========================================================
 }
 
 {$mode ObjFPC}{$H+}
